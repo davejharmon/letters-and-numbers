@@ -1,0 +1,22 @@
+{
+  "name": "letters-and-numbers",
+  "version": "1.0.0",
+  "description": "Letters & Numbers streaming app",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davejharmon/letters-and-numbers.git"
+  },
+  "author": "Dave Harmon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davejharmon/letters-and-numbers/issues"
+  },
+  "homepage": "https://github.com/davejharmon/letters-and-numbers#readme",
+  "devDependencies": {
+    "parcel": "^2.0.1"
+  }
+}

@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  height: 75vh;
+  color: #333;
+  background-image: linear-gradient(to top left, #364482 0%, #7e98df 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main {
+  width: 100rem;
+  height: 60rem;
+  background-color: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(200px);
+  filter: blur();
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
+  border-radius: 9px;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column;
+}
+
+footer {
+  width: 100vw;
+  height: 25vh;
+  background-color: #333;
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  color: #aaa;
+}
+
+.title {
+  display: inherit;
+  flex-flow: column;
+  justify-content: center;
+  background-image: linear-gradient(to top left, #4760f7 0%, #2f3a81 100%);
+}
+
+.title-line {
+  display: inherit;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.title-line div {
+  background: #364482;
+  color: white;
+  font-weight: bold;
+  font-size: 5em;
+  padding: 1rem;
+  margin: 1rem;
+  width: 10rem;
+  height: 10rem;
+  line-height: 8rem;
+  text-align: center;
+}
+/*
+
+.title div {
+  background: #364482;
+  padding: 1rem;
+  width: 10rem;
+  height: 10rem;
+  margin: 2rem;
+  line-height: 9rem;
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
+}
+
+.puzzle {
+  background: slateblue;
+  color: white;
+  padding: 1rem;
+  font-size: 4em;
+  margin: 3rem 3rem 0rem 3rem;
+  text-align: center;
+}
+
+.lettersNumbers {
+  background: #fff;
+  padding: 1rem;
+  font-size: 3em;
+  margin: 3rem;
+  text-align: center;
+}
+
+.buttons {
+  display: inherit;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.buttons button {
+  color: #444;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 400;
+  transition: all 0.2s;
+
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+
+  padding: 0.7rem 2.5rem;
+  border-radius: 50rem;
+  box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
+}
+
+.buttons button:active {
+  transform: translate(1px, 3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.timerMode {
+  background-color: tomato;
+  color: white;
+}
+
+.hidden {
+  display: none;
+} */
