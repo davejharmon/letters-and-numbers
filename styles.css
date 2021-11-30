@@ -16,7 +16,7 @@ body {
   font-weight: 400;
   height: 75vh;
   color: #333;
-  background-image: linear-gradient(to top left, #364482 0%, #7e98df 100%);
+  background-image: linear-gradient(to top left, royalblue 0%, steelblue 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,6 +47,7 @@ footer {
   background-color: #333;
   position: absolute;
   display: flex;
+  flex-flow: column;
   bottom: 0;
   color: #aaa;
 }
@@ -75,6 +76,7 @@ footer {
   height: 10rem;
   line-height: 8rem;
   text-align: center;
+  border-radius: 3px;
 }
 
 .target-line {
@@ -116,7 +118,6 @@ footer {
   justify-content: center;
   color: royalblue;
 }
-
 .game-picks div {
   background: white;
   font-weight: bold;
@@ -127,6 +128,8 @@ footer {
   height: 10rem;
   line-height: 8rem;
   text-align: center;
+  border-radius: 3px;
+  transition: all 1s;
 }
 
 .game-buttons {
@@ -138,7 +141,7 @@ footer {
   color: rgba(0, 0, 0, 0.2);
 }
 
-.gameboard button {
+button {
   color: #444;
   border: none;
   font-family: inherit;
@@ -158,11 +161,17 @@ footer {
   box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
 }
 
-.gameboard button:active {
+button:active {
   transform: translate(1px, 3px);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 }
 
+.backend {
+  display: inherit;
+}
+
+.backend-console {
+}
 .hidden {
   visibility: hidden;
 }
