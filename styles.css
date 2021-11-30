@@ -171,7 +171,9 @@ button:active {
 }
 
 .backend-console {
+  text-align: center;
 }
+
 .hidden {
   visibility: hidden;
 }
