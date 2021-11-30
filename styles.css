@@ -22,6 +22,12 @@ body {
   justify-content: center;
 }
 
+h1 {
+  display: block;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+}
+
 main {
   width: 100rem;
   height: 60rem;
@@ -62,7 +68,7 @@ footer {
   background: #364482;
   color: white;
   font-weight: bold;
-  font-size: 5em;
+  font-size: 5rem;
   padding: 1rem;
   margin: 1rem;
   width: 10rem;
@@ -70,6 +76,39 @@ footer {
   line-height: 8rem;
   text-align: center;
 }
+
+.gameboard {
+  display: inherit;
+  flex-flow: column;
+}
+
+.game-picks {
+  display: inherit;
+  justify-content: center;
+  color: royalblue;
+}
+
+.game-picks div {
+  background: white;
+  font-weight: bold;
+  font-size: 5rem;
+  padding: 1rem;
+  margin: 1rem;
+  width: 10rem;
+  height: 10rem;
+  line-height: 8rem;
+  text-align: center;
+}
+
+.game-buttons {
+  display: inherit;
+  justify-content: space-evenly;
+}
+
+.pick-empty {
+  color: rgba(0, 0, 0, 0.2);
+}
+
 /*
 
 .title div {

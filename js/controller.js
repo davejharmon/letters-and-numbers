@@ -1,6 +1,37 @@
 import * as model from './model.js';
+import backendView from './views/backendView.js';
 
 ////////////////////////////////////////
+
+/**
+ * Handle button presses on the console.
+ * @param {String} label The label on the button clicked
+ */
+
+const handleConsole = function (label) {
+  switch (label) {
+    case 'new-numbers':
+      console.log('Load numbers game...');
+      model.newNumbersGame();
+
+      break;
+    case 'new-letters':
+      console.log('Love letters games, seriously');
+      break;
+    case 'new-conundrum':
+      console.log('Lets have a conundrum');
+      break;
+    default:
+      break;
+  }
+};
+
+const init = function () {
+  console.log('Hello world...');
+  backendView.addHandlerConsole(handleConsole);
+};
+
+init();
 
 ////////////////////////////////////////
 // Old code
