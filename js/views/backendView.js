@@ -14,7 +14,20 @@ class BackendView extends View {
   }
 
   _generateMarkup() {
-    return 'markup generated';
+    return `
+    <div class="game-picks" id="picks-num">
+      <div class="pick pick-num pick-empty" data-box="1">?</div>
+      <div class="pick pick-num pick-empty" data-box="2">?</div>
+      <div class="pick pick-num pick-empty" data-box="3">?</div>
+      <div class="pick pick-num pick-empty" data-box="4">?</div>
+      <div class="pick pick-num pick-empty" data-box="5">?</div>
+      <div class="pick pick-num pick-empty" data-box="6">?</div>
+    </div>
+    <div class="game-buttons">
+      <button class="btn" id="game-btn-one">OPTION 1</button>
+      <button class="btn" id="game-btn-timer">⏱ TIMER</button>
+      <button class="btn" id="game-btn-two">OPTION 2</button>
+    </div>`;
   }
 }
 

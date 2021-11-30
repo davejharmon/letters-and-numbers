@@ -1,7 +1,47 @@
 import * as model from './model.js';
+import * as CONFIG from './config.js';
 import backendView from './views/backendView.js';
+import gameboardView from './views/gameboardView.js';
+import headerView from './views/headerView.js';
 
 ////////////////////////////////////////
+
+const handleGameboard = function (btnAction) {
+  const currentRound = model.state.game[model.state.round];
+
+  // step zero: test for timer button
+  if (btnAction === 'timer' && currentRound.type === 'numbers') {
+    headerView.flipToTarget(currentRound.target);
+    // start timer...
+  }
+
+  // outherwise...
+
+  if (currentRound.picks.length >= CONFIG.NUMBERS_MAX)
+    // step one: test for full boxes
+    return; // needs to be dynamic
+
+  // step two: try and add a box
+  try {
+    const num = model.pickNumber(btnAction);
+    gameboardView.show(num);
+  } catch (err) {
+    gameboardView.renderError(err, false);
+  }
+
+  // if final box, reveal timer
+  if (currentRound.picks.length === currentRound.maxLength) {
+    readyNumbersRound(currentRound);
+  }
+
+  console.log(currentRound);
+};
+
+const readyNumbersRound = function (round) {
+  gameboardView.toggleVis('timer');
+  model.calculateNumbersAnswer(); // not implemented yet
+  //
+};
 
 /**
  * Handle button presses on the console.
@@ -13,15 +53,18 @@ const handleConsole = function (label) {
     case 'new-numbers':
       console.log('Load numbers game...');
       model.newNumbersGame();
-
+      gameboardView.render(model.state.game[model.state.round]);
       break;
     case 'new-letters':
       console.log('Love letters games, seriously');
+      // todo: build model.newLettersGame
       break;
     case 'new-conundrum':
       console.log('Lets have a conundrum');
+      // todo: build model.conundrum
       break;
     default:
+      // something went wrong
       break;
   }
 };
@@ -29,6 +72,7 @@ const handleConsole = function (label) {
 const init = function () {
   console.log('Hello world...');
   backendView.addHandlerConsole(handleConsole);
+  gameboardView.addHandlerGameboard(handleGameboard);
 };
 
 init();
