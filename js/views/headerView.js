@@ -6,7 +6,10 @@ class HeaderView extends View {
   _message = 'hello from the header';
 
   _generateMarkup() {
-    return `${this._data}`;
+    return `
+    <div class="target-line">
+      <div class="target">${this._data}</div>
+    </div>`;
   }
 
   flipToTarget = function (targetNumber) {

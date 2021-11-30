@@ -12,6 +12,7 @@ const handleGameboard = function (btnAction) {
   // step zero: test for timer button
   if (btnAction === 'timer' && currentRound.type === 'numbers') {
     headerView.flipToTarget(currentRound.target);
+    model.startTimer();
     // start timer...
   }
 
