@@ -5,23 +5,19 @@ class GameboardView extends View {
   _errorMessage = 'something went wrong in the gameboard';
   _message = 'hello from the gameboard';
 
-  addHandlerGameboard(handler) {
-    this._parentElement.addEventListener('click', function (e) {
-      const btn = e.target.closest('.btn');
-      if (!btn) return;
-      handler(btn.dataset.action);
-    });
-  }
-
   show(val) {
     // find first empty box
     const box = this._parentElement.querySelector('.pick-empty');
-
     // update classList
     box.classList.toggle('pick-empty');
-
     // update innertext
     box.innerHTML = val;
+  }
+
+  startTimer(handler, round) {
+    // replace timer button text
+    const timer = this._parentElement.querySelector('.timer');
+    setInterval(handler, 1000);
   }
 
   _generateMarkup() {
@@ -33,11 +29,6 @@ class GameboardView extends View {
       <div class="pick pick-num pick-empty" data-box="4">?</div>
       <div class="pick pick-num pick-empty" data-box="5">?</div>
       <div class="pick pick-num pick-empty" data-box="6">?</div>
-    </div>
-    <div class="game-buttons">
-      <button class="btn" id="game-btn-1" data-action="1">BIG NUMBER</button>
-      <button class="btn hidden timer" id="game-btn-timer" data-action="timer">⏱ TIMER</button>
-      <button class="btn" id="game-btn-2"data-action="2">SMALL NUMBER</button>
     </div>`;
   }
 }

@@ -57,7 +57,3 @@ export const pickNumber = function (stackNum) {
   state.game[state.round].picks.push(num);
   return num;
 };
-
-export const startTimer = function () {
-  console.log('Starting timer...');
-};

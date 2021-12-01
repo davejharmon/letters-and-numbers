@@ -1,26 +1,35 @@
 import * as model from './model.js';
 import * as CONFIG from './config.js';
-import backendView from './views/backendView.js';
-import gameboardView from './views/gameboardView.js';
 import headerView from './views/headerView.js';
+import gameboardView from './views/gameboardView.js';
+import buttonsView from './views/buttonsView.js';
+import backendView from './views/backendView.js';
 
 ////////////////////////////////////////
 
-const handleGameboard = function (btnAction) {
+const handleGameButtons = function (btnAction) {
   const currentRound = model.state.game[model.state.round];
 
   // step zero: test for timer button
   if (btnAction === 'timer' && currentRound.type === 'numbers') {
-    headerView.flipToTarget(currentRound.target);
-    model.startTimer();
-    // start timer...
+    headerView.loadNumberGame(currentRound);
+    currentRound.countdown = true;
+    const numbersCountdown = setInterval(() => {
+      if (currentRound.time === 0) {
+        console.log('TIMER FINISHED');
+        currentRound.countdown = false;
+        clearInterval(numbersCountdown);
+      }
+      currentRound.time--;
+      buttonsView.update(currentRound);
+    }, 1000);
   }
 
   // outherwise...
 
   if (currentRound.picks.length >= CONFIG.NUMBERS_MAX)
     // step one: test for full boxes
-    return; // needs to be dynamic
+    return;
 
   // step two: try and add a box
   try {
@@ -39,7 +48,7 @@ const handleGameboard = function (btnAction) {
 };
 
 const readyNumbersRound = function (round) {
-  gameboardView.toggleVis('timer');
+  buttonsView.toggleVis('timer');
   model.calculateNumbersAnswer(); // not implemented yet
   //
 };
@@ -55,6 +64,7 @@ const handleConsole = function (label) {
       console.log('Load numbers game...');
       model.newNumbersGame();
       gameboardView.render(model.state.game[model.state.round]);
+      buttonsView.render(model.state.game[model.state.round]);
       break;
     case 'new-letters':
       console.log('Love letters games, seriously');
@@ -73,7 +83,7 @@ const handleConsole = function (label) {
 const init = function () {
   console.log('Hello world...');
   backendView.addHandlerConsole(handleConsole);
-  gameboardView.addHandlerGameboard(handleGameboard);
+  buttonsView.addHandlerGameButtons(handleGameButtons);
 };
 
 init();

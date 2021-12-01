@@ -7,13 +7,19 @@ class HeaderView extends View {
 
   _generateMarkup() {
     return `
-    <div class="target-line">
-      <div class="target">${this._data}</div>
+    <div class="target inactive">
+      <div>${this._data.target}</div>
+    </div>
+    <div class="title inactive">
+      <div>LETTERS</div>
+      <div>NUMBERS</div>
     </div>`;
   }
 
-  flipToTarget = function (targetNumber) {
-    this.render(targetNumber);
-  };
+  loadNumberGame(round) {
+    this.update(round);
+    this.toggleActive('target');
+  }
 }
+
 export default new HeaderView();
