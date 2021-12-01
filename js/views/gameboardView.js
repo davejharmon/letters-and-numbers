@@ -4,6 +4,7 @@ class GameboardView extends View {
   _parentElement = document.querySelector('.gameboard');
   _errorMessage = 'something went wrong in the gameboard';
   _message = 'hello from the gameboard';
+  _default = ``;
 
   show(val) {
     // find first empty box

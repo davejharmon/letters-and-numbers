@@ -1,3 +1,4 @@
+export const TIMEOUT_SEC = 10;
 export const TIMER_SEC = 30;
 export const NUMBERS_SET = [
   [25, 50, 75, 100],

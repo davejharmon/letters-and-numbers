@@ -1,4 +1,5 @@
 import * as CONFIG from './config.js';
+import { AJAX } from './helpers.js';
 
 export const state = {
   round: 0,
@@ -58,9 +59,12 @@ export const newGame = function (gametype) {
   console.log(state.game.at(-1));
 };
 
-export const calculateNumbersAnswer = function () {
+export const findSolution = async function (round) {
   // calculate answer here
-  console.log('To do: calculate nearest answer algorithm');
+  console.log("Let's find a solution...");
+  // const apiAddress = `http://www.anagramica.com/best/idnetity`;
+  // const result = await AJAX(apiAddress);
+  // console.log(result);
 };
 
 export const pickNumber = function (stackNum) {

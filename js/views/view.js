@@ -2,21 +2,22 @@ export default class View {
   _data;
 
   /**
-   * Render the received object to the dom
-   * @param {Object} data The data to be rendered to the view
-   * @returns Nothing
-   * @this {Object} View instance
-   * @author Jonas Schmedtmann
+   * Render the object in the dom
+   * @param {Object} data Data to be rendered (game round object)
+   * @param {bool} render Render on screen if true, return if false
+   * @param {bool} reinit Reinitialise content if true
+   * @returns {String} Markup for DOM
    */
 
-  render(data, render = true) {
+  render(data, render = true, reinit = false) {
     if (!data || (Array.isArray(data) && data.length === 0)) {
       return this.renderError();
     }
     this._data = data;
-    const markup = this._generateMarkup();
+    const markup = !reinit ? this._generateMarkup() : this._default;
 
     if (!render) return markup;
+
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }

@@ -4,7 +4,6 @@ import headerView from './views/headerView.js';
 import gameboardView from './views/gameboardView.js';
 import buttonsView from './views/buttonsView.js';
 import backendView from './views/backendView.js';
-
 ////////////////////////////////////////
 
 const handleGameButtons = function (btnAction) {
@@ -12,8 +11,8 @@ const handleGameButtons = function (btnAction) {
 
   // step zero: test for timer button
   if (btnAction === 'timer' && currentRound.type === 'numbers') {
-    headerView.loadNumberGame(currentRound);
     currentRound.countdown = true;
+    headerView.loadNumberGame(currentRound);
     model.state.timer = setInterval(() => {
       if (currentRound.time === 0) {
         currentRound.countdown = false;
@@ -25,6 +24,7 @@ const handleGameButtons = function (btnAction) {
     }, 1000);
   }
 
+  // TODO: REFACTOR
   if (btnAction === 'timer' && currentRound.type === 'letters') {
     currentRound.countdown = true;
     model.state.timer = setInterval(() => {
@@ -54,6 +54,7 @@ const handleGameButtons = function (btnAction) {
   // if final box, reveal timer
   if (currentRound.picks.length === currentRound.maxLength) {
     armTimer(currentRound);
+    model.findSolution(currentRound);
   }
 
   console.log(currentRound);
@@ -75,6 +76,7 @@ const handleConsole = function (label) {
   model.newGame(label.slice(4));
   // update view
   const currentRound = model.state.game[model.state.round];
+  headerView.render(currentRound, true, true);
   gameboardView.render(currentRound);
   buttonsView.render(currentRound);
 };
