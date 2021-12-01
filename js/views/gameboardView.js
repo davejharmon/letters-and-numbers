@@ -14,22 +14,12 @@ class GameboardView extends View {
     box.innerHTML = val;
   }
 
-  startTimer(handler, round) {
-    // replace timer button text
-    const timer = this._parentElement.querySelector('.timer');
-    setInterval(handler, 1000);
-  }
-
   _generateMarkup() {
-    return `
-    <div class="game-picks" id="picks-num">
-      <div class="pick pick-num pick-empty" data-box="1">?</div>
-      <div class="pick pick-num pick-empty" data-box="2">?</div>
-      <div class="pick pick-num pick-empty" data-box="3">?</div>
-      <div class="pick pick-num pick-empty" data-box="4">?</div>
-      <div class="pick pick-num pick-empty" data-box="5">?</div>
-      <div class="pick pick-num pick-empty" data-box="6">?</div>
-    </div>`;
+    let boxesMarkup = '';
+    for (let i = 0; i < this._data.maxLength; i++)
+      boxesMarkup += `<div class = "pick pick-empty" data-box="${i}">?</div>\n`;
+
+    return `<div class="game-picks" id="picks-num">\n` + boxesMarkup + `</div>`;
   }
 }
 

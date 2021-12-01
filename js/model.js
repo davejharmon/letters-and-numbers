@@ -15,32 +15,46 @@ export const state = {
     },
   ],
   playing: false,
+  timer: null,
 };
 
-export const newNumbersGame = function () {
+export const newGame = function (gametype) {
   // deep duplication (crazy but it works)
-  const [[...bignums], [...smallnums]] = [...CONFIG.NUMBERS_SET];
+  let set1, set2, maxLength;
+  if (gametype === 'numbers') {
+    [[...set1], [...set2]] = [...CONFIG.NUMBERS_SET];
+    maxLength = CONFIG.NUMBERS_MAX;
+  }
+
+  if (gametype === 'letters') {
+    [[...set1], [...set2]] = [...CONFIG.LETTERS_SET];
+    maxLength = CONFIG.LETTERS_MAX;
+  }
+
+  if (gametype === 'conundrum') {
+    console.log('conundrum not implemented yet');
+  }
 
   // shuffle numbers
-  bignums.sort(() => Math.random() - 0.5);
-  smallnums.sort(() => Math.random() - 0.5);
+  set1.sort(() => Math.random() - 0.5);
+  set2.sort(() => Math.random() - 0.5);
 
   // generate new numbers round
-  const newNumbersRound = {
-    type: 'numbers',
+  const newRound = {
+    type: gametype,
     picks: [],
-    stack1: bignums,
-    stack2: smallnums,
-    target: Math.floor(Math.random() * 900) + 100,
-    maxLength: CONFIG.NUMBERS_MAX,
+    stack1: set1,
+    stack2: set2,
+    target: Math.floor(Math.random() * 900) + 100, // only used in number round
+    maxLength: maxLength,
     time: +CONFIG.TIMER_SEC,
     countdown: false,
   };
 
   //update the state
-  state.game.push(newNumbersRound);
+  state.game.push(newRound);
   state.round = state.game.length - 1;
-  console.log(`ROUND ${state.round}=========`);
+  console.log(`ROUND ${state.round} ========= (${gametype})`);
   console.log(state.game.at(-1));
 };
 

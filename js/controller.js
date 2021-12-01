@@ -14,11 +14,24 @@ const handleGameButtons = function (btnAction) {
   if (btnAction === 'timer' && currentRound.type === 'numbers') {
     headerView.loadNumberGame(currentRound);
     currentRound.countdown = true;
-    const numbersCountdown = setInterval(() => {
+    model.state.timer = setInterval(() => {
       if (currentRound.time === 0) {
-        console.log('TIMER FINISHED');
         currentRound.countdown = false;
-        clearInterval(numbersCountdown);
+        clearInterval(model.state.timer);
+        return;
+      }
+      currentRound.time--;
+      buttonsView.update(currentRound);
+    }, 1000);
+  }
+
+  if (btnAction === 'timer' && currentRound.type === 'letters') {
+    currentRound.countdown = true;
+    model.state.timer = setInterval(() => {
+      if (currentRound.time === 0) {
+        currentRound.countdown = false;
+        clearInterval(model.state.timer);
+        return;
       }
       currentRound.time--;
       buttonsView.update(currentRound);
@@ -27,9 +40,8 @@ const handleGameButtons = function (btnAction) {
 
   // outherwise...
 
-  if (currentRound.picks.length >= CONFIG.NUMBERS_MAX)
-    // step one: test for full boxes
-    return;
+  // step one: test for full boxes
+  if (currentRound.picks.length >= currentRound.maxLength) return;
 
   // step two: try and add a box
   try {
@@ -41,16 +53,14 @@ const handleGameButtons = function (btnAction) {
 
   // if final box, reveal timer
   if (currentRound.picks.length === currentRound.maxLength) {
-    readyNumbersRound(currentRound);
+    armTimer(currentRound);
   }
 
   console.log(currentRound);
 };
 
-const readyNumbersRound = function (round) {
+const armTimer = function (round) {
   buttonsView.toggleVis('timer');
-  model.calculateNumbersAnswer(); // not implemented yet
-  //
 };
 
 /**
@@ -59,25 +69,14 @@ const readyNumbersRound = function (round) {
  */
 
 const handleConsole = function (label) {
-  switch (label) {
-    case 'new-numbers':
-      console.log('Load numbers game...');
-      model.newNumbersGame();
-      gameboardView.render(model.state.game[model.state.round]);
-      buttonsView.render(model.state.game[model.state.round]);
-      break;
-    case 'new-letters':
-      console.log('Love letters games, seriously');
-      // todo: build model.newLettersGame
-      break;
-    case 'new-conundrum':
-      console.log('Lets have a conundrum');
-      // todo: build model.conundrum
-      break;
-    default:
-      // something went wrong
-      break;
-  }
+  // clear timer
+  if (model.state.timer) clearInterval(model.state.timer);
+  // create game object
+  model.newGame(label.slice(4));
+  // update view
+  const currentRound = model.state.game[model.state.round];
+  gameboardView.render(currentRound);
+  buttonsView.render(currentRound);
 };
 
 const init = function () {
