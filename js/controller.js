@@ -4,6 +4,7 @@ import headerView from './views/headerView.js';
 import gameboardView from './views/gameboardView.js';
 import buttonsView from './views/buttonsView.js';
 import backendView from './views/backendView.js';
+import backendNavView from './views/backendNavView.js';
 ////////////////////////////////////////
 
 const handleGameButtons = function (btnAction) {
@@ -54,7 +55,7 @@ const startGame = function (currentRound) {
     const cecil = setInterval(() => {
       console.log(currentRound);
       headerView.update(currentRound);
-      currentRound.target.shift();
+      currentRound.target.shift(); // BAD PRACTICE, shouldn't modify the model.
       if (currentRound.target.length === 0) clearInterval(cecil);
     }, 100);
   }
@@ -77,10 +78,23 @@ const handleConsole = function (label) {
   buttonsView.render(currentRound);
 };
 
+const handleNavBar = function (label) {
+  console.log(`Clicked ${label}`);
+
+  if (label.slice(7) == 'navDown') model.state.consolePos[0] = 'down';
+  if (label == 'navLeft') model.state.consolePos[1] = 'left';
+  if (label == 'navRight') model.state.consolePos[1] = 'right';
+
+  console.log(`Console pos ${model.state.consolePos}`);
+  backendNavView.update(model.state.consolePos);
+  backendView.moveConsole(model.state.consolePos);
+};
 const init = function () {
   console.log('Hello world...');
+  console.log(`Console pos ${model.state.consolePos}`);
   backendView.addHandlerConsole(handleConsole);
   buttonsView.addHandlerGameButtons(handleGameButtons);
+  backendNavView.addHandlerBackendNav(handleNavBar);
 };
 
 init();

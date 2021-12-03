@@ -50,8 +50,6 @@ footer {
   width: 25vw;
   display: flex;
   flex-flow: column;
-  bottom: 0;
-  right: 0;
   text-align: center;
   color: #aaa;
 }
@@ -170,10 +168,30 @@ button:active {
 
 .backend {
   display: inherit;
+  bottom: 0;
+  right: 0;
+  transition: all 1s;
+}
+
+.backend-navbar {
+  display: inherit;
+  background-color: #222;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.backend-navbar div {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.backend-navbar div:hover {
+  cursor: pointer;
 }
 
 .backend-console {
   text-align: center;
+  padding: 2rem 0rem;
 }
 
 .hidden {
@@ -187,74 +205,3 @@ button:active {
 .reversed {
   transform: initial;
 }
-
-/*
-.title div {
-  background: #364482;
-  padding: 1rem;
-  width: 10rem;
-  height: 10rem;
-  margin: 2rem;
-  line-height: 9rem;
-  color: white;
-  font-weight: bold;
-  font-size: 3em;
-  text-align: center;
-}
-
-.puzzle {
-  background: slateblue;
-  color: white;
-  padding: 1rem;
-  font-size: 4em;
-  margin: 3rem 3rem 0rem 3rem;
-  text-align: center;
-}
-
-.lettersNumbers {
-  background: #fff;
-  padding: 1rem;
-  font-size: 3em;
-  margin: 3rem;
-  text-align: center;
-}
-
-.buttons {
-  display: inherit;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
-}
-
-.buttons button {
-  color: #444;
-  background: none;
-  border: none;
-  font-family: inherit;
-  font-size: 1.8rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-weight: 400;
-  transition: all 0.2s;
-
-  background-color: white;
-  background-color: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
-
-  padding: 0.7rem 2.5rem;
-  border-radius: 50rem;
-  box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
-}
-
-.buttons button:active {
-  transform: translate(1px, 3px);
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
-}
-
-.timerMode {
-  background-color: tomato;
-  color: white;
-}
-
-.hidden {
-  display: none;
-} */

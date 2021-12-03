@@ -17,6 +17,7 @@ export const state = {
   ],
   playing: false,
   timer: null,
+  consolePos: ['up', 'right'],
 };
 
 export const newGame = function (gametype) {
