@@ -46,11 +46,16 @@ export const newGame = function (gametype) {
     picks: [],
     stack1: set1,
     stack2: set2,
-    target: Math.floor(Math.random() * 900) + 100, // only used in number round
+    target: [],
     maxLength: maxLength,
     time: +CONFIG.TIMER_SEC,
     countdown: false,
   };
+
+  // if numbers round, populate targetNums array
+  for (let i = 0; i < 7; i++) {
+    newRound.target.push(Math.floor(Math.random() * 900) + 100);
+  }
 
   //update the state
   state.game.push(newRound);

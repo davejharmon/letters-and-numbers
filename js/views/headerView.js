@@ -11,8 +11,8 @@ class HeaderView extends View {
 
   _generateMarkup() {
     return `
-    <div class="target inactive">
-      <div>${this._data.target}</div>
+    <div class="target active">
+      <div>${this._data.target[0]}</div>
     </div>
     <div class="title inactive">
       <div>LETTERS</div>
@@ -20,7 +20,7 @@ class HeaderView extends View {
     </div>`;
   }
 
-  loadNumberGame(round) {
+  loadNumbersGame(round) {
     this.render(round);
     this.toggleActive('target');
   }

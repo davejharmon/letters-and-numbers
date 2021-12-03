@@ -10,35 +10,7 @@ const handleGameButtons = function (btnAction) {
   const currentRound = model.state.game[model.state.round];
 
   // step zero: test for timer button
-  if (btnAction === 'timer' && currentRound.type === 'numbers') {
-    currentRound.countdown = true;
-    headerView.loadNumberGame(currentRound);
-    model.state.timer = setInterval(() => {
-      if (currentRound.time === 0) {
-        currentRound.countdown = false;
-        clearInterval(model.state.timer);
-        return;
-      }
-      currentRound.time--;
-      buttonsView.update(currentRound);
-    }, 1000);
-  }
-
-  // TODO: REFACTOR
-  if (btnAction === 'timer' && currentRound.type === 'letters') {
-    currentRound.countdown = true;
-    model.state.timer = setInterval(() => {
-      if (currentRound.time === 0) {
-        currentRound.countdown = false;
-        clearInterval(model.state.timer);
-        return;
-      }
-      currentRound.time--;
-      buttonsView.update(currentRound);
-    }, 1000);
-  }
-
-  // outherwise...
+  if (btnAction === 'timer') startGame(currentRound);
 
   // step one: test for full boxes
   if (currentRound.picks.length >= currentRound.maxLength) return;
@@ -56,12 +28,36 @@ const handleGameButtons = function (btnAction) {
     armTimer(currentRound);
     model.findSolution(currentRound);
   }
-
-  console.log(currentRound);
 };
 
 const armTimer = function (round) {
   buttonsView.toggleVis('timer');
+};
+
+const startGame = function (currentRound) {
+  // step zero: start the timer
+  currentRound.countdown = true;
+  model.state.timer = setInterval(() => {
+    if (currentRound.time === 0) {
+      currentRound.countdown = false;
+      clearInterval(model.state.timer);
+      return;
+    }
+    currentRound.time--;
+    buttonsView.update(currentRound);
+  }, 1000);
+
+  if (currentRound.type === 'numbers') {
+    headerView.loadNumbersGame(currentRound);
+
+    // perform the cecil animation (randomising number)
+    const cecil = setInterval(() => {
+      console.log(currentRound);
+      headerView.update(currentRound);
+      currentRound.target.shift();
+      if (currentRound.target.length === 0) clearInterval(cecil);
+    }, 100);
+  }
 };
 
 /**

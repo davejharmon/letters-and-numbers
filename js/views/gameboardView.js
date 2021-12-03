@@ -11,6 +11,7 @@ class GameboardView extends View {
     const box = this._parentElement.querySelector('.pick-empty');
     // update classList
     box.classList.toggle('pick-empty');
+    box.style.transform = 'none';
     // update innertext
     box.innerHTML = val;
   }
