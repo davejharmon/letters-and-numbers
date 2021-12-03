@@ -13,16 +13,19 @@ class BackendView extends View {
     });
   }
 
-  moveConsole(pos) {
-    if (pos[1] === 'left') {
-      this._parentElement.style.right = 'auto';
-      this._parentElement.style.left = '0';
-      return;
+  moveConsole(dir) {
+    console.log(dir);
+    if (dir === 'left') {
+      this._parentElement.style.transform = 'translate(-75vw)';
     }
-    if (pos[1] === 'right') {
-      this._parentElement.style.right = '0';
-      this._parentElement.style.left = 'auto';
-      return;
+    if (dir === 'right') {
+      this._parentElement.style.transform = 'translate(0%)';
+    }
+
+    if (dir === 'down' || dir === 'up') {
+      this._parentElement
+        .querySelector('.backend-console')
+        .classList.toggle('inactive');
     }
   }
   _generateMarkup() {

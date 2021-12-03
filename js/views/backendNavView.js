@@ -19,13 +19,7 @@ class BackendNavView extends View {
       <div class="navbtn${
         this._data[1] !== 'left' ? '' : ' inactive'
       }" id="navLeft">◀</div>
-      <div class="navbtn${
-        this._data[0] === 'up' && this._data[1] !== 'right' ? '' : ' inactive'
-      }" id="navDownLeft">🔻</div>
-      <div>STREAMER CONSOLE</div>
-      <div class="navbtn${
-        this._data[0] === 'up' && this._data[1] !== 'left' ? '' : ' inactive'
-      }" id="navDownRight">🔻</div>
+      <div class="navbtn" id="navTitle">STREAMER CONSOLE</div>
       <div class="navbtn${
         this._data[1] !== 'right' ? '' : ' inactive'
       }" id="navRight">▶</div>

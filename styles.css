@@ -170,7 +170,7 @@ button:active {
   display: inherit;
   bottom: 0;
   right: 0;
-  transition: all 1s;
+  transition: all 1s ease;
 }
 
 .backend-navbar {
@@ -192,6 +192,7 @@ button:active {
 .backend-console {
   text-align: center;
   padding: 2rem 0rem;
+  height: 20rem;
 }
 
 .hidden {
@@ -200,8 +201,4 @@ button:active {
 
 .inactive {
   display: none;
-}
-
-.reversed {
-  transform: initial;
 }

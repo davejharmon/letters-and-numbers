@@ -80,14 +80,17 @@ const handleConsole = function (label) {
 
 const handleNavBar = function (label) {
   console.log(`Clicked ${label}`);
+  let navDir;
 
-  if (label.slice(7) == 'navDown') model.state.consolePos[0] = 'down';
-  if (label == 'navLeft') model.state.consolePos[1] = 'left';
-  if (label == 'navRight') model.state.consolePos[1] = 'right';
+  if (label == 'navTitle') {
+    model.state.consolePos[0] == 'down' ? 'up' : 'down';
+    navDir = model.state.consolePos[0];
+  }
+  if (label == 'navLeft') navDir = model.state.consolePos[1] = 'left';
+  if (label == 'navRight') navDir = model.state.consolePos[1] = 'right';
 
-  console.log(`Console pos ${model.state.consolePos}`);
-  backendNavView.update(model.state.consolePos);
-  backendView.moveConsole(model.state.consolePos);
+  backendView.moveConsole(navDir);
+  backendNavView.render(model.state.consolePos);
 };
 const init = function () {
   console.log('Hello world...');
