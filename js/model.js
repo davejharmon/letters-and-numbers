@@ -144,6 +144,7 @@ export const crunchNumbers = function (round) {
 export const findSolution = async function (round) {
   // calculate answer here
   console.log("Let's find a solution...");
+  console.log(`this is ${this}`);
   if (round.type === 'numbers') this.crunchNumbers(round);
   // const apiAddress = `http://www.anagramica.com/best/idnetity`;
   // const result = await AJAX(apiAddress);
