@@ -70,15 +70,6 @@ export const newGame = function (gametype) {
   console.log(state.game.at(-1));
 };
 
-export const findSolution = async function (round) {
-  // calculate answer here
-  console.log("Let's find a solution...");
-  if (round.type === 'numbers') this.crunchNumbers(round);
-  // const apiAddress = `http://www.anagramica.com/best/idnetity`;
-  // const result = await AJAX(apiAddress);
-  // console.log(result);
-};
-
 export const pickNumber = function (stackNum) {
   const key = `stack${stackNum}`;
   const maxKey = `maxStack${stackNum}`;
@@ -148,4 +139,13 @@ export const crunchNumbers = function (round) {
   round.target.push(expr[0]);
   round.solution = expr[1];
   console.log(expr);
+};
+
+export const findSolution = async function (round) {
+  // calculate answer here
+  console.log("Let's find a solution...");
+  if (round.type === 'numbers') this.crunchNumbers(round);
+  // const apiAddress = `http://www.anagramica.com/best/idnetity`;
+  // const result = await AJAX(apiAddress);
+  // console.log(result);
 };
