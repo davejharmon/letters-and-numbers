@@ -22,7 +22,7 @@ const handleGameButtons = function (btnAction) {
     const num = model.pickNumber(btnAction);
     gameboardView.show(num);
   } catch (err) {
-    gameboardView.renderError(err, false);
+    gameboardView.boxError();
   }
 
   // if final box, reveal timer
@@ -46,7 +46,7 @@ const startGame = function (currentRound) {
       return;
     }
     currentRound.time--;
-    // if (currentRound.time === 10) gameboardView.warning(); // NOT IMPLEMENTED YET
+    // if (currentRound.time === 10) gameboardView.warning(); // TODO: nice global animation
     buttonsView.update(currentRound);
   }, 1000);
 
@@ -57,7 +57,7 @@ const startGame = function (currentRound) {
     const cecil = setInterval(() => {
       console.log(currentRound);
       headerView.update(currentRound);
-      currentRound.target.shift(); // BAD PRACTICE, shouldn't modify the model.
+      currentRound.target.shift(); // FIXME:, shouldn't modify the model.
       if (currentRound.target.length === 0) clearInterval(cecil);
     }, 100);
   }

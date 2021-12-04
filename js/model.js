@@ -50,6 +50,8 @@ export const newGame = function (gametype) {
     target: [],
     solution: '',
     maxLength: maxLength,
+    maxStack1: gametype === 'numbers' ? 4 : 5, // TODO: magic numbers, should be in config
+    maxStack2: 6,
     time: +CONFIG.TIMER_SEC,
     countdown: false,
   };
@@ -79,23 +81,50 @@ export const findSolution = async function (round) {
 
 export const pickNumber = function (stackNum) {
   const key = `stack${stackNum}`;
+  const maxKey = `maxStack${stackNum}`;
   const curGame = state.game[state.round];
   const num = curGame[key].shift();
-  if (!num) throw new Error('no numbers left bazza');
+  curGame[maxKey]--;
+  if (curGame[maxKey] < 0)
+    throw new Error('Too many choices from this category');
+  if (!num) throw new Error('Stack is empty');
   state.game[state.round].picks.push(num);
   return num;
 };
 
 export const crunchNumbers = function (round) {
   console.log("Let's find a numbers solution...");
-  // step one: shuffle the picks into a new array
+  // FIXME: This is messy, needs refactoring
+  const nums = round.picks;
+  let randomLargeNum, secondLargestNum;
+  // step one: multiply the largest small by a random large to kick us off.
+  const largestSmallNum = [...nums].reduce((acc, pick) =>
+    pick > acc && pick < 25 ? pick : acc
+  );
+  nums.splice(nums[nums.indexOf(largestSmallNum)], 1);
+
+  const largeNums = [...round.picks].filter(pick => pick >= 25);
+  if (largeNums.length > 0) {
+    randomLargeNum = largeNums.at(Math.floor(Math.random() * largeNums.length));
+  } else {
+    secondLargestNum = [...nums].reduce((acc, pick) =>
+      pick > acc ? pick : acc
+    );
+  }
+  const secondNum = randomLargeNum ? randomLargeNum : secondLargestNum;
+  nums.splice(nums[nums.indexOf(secondNum)], 1);
+
+  console.log(
+    `Largest Small Num is ${largestSmallNum} and second num is ${secondNum}. There are ${nums.lenth} nums remaining.`
+  );
+
   const shuffledPicks = [...round.picks].sort(() => Math.random() - 0.5);
   let num;
   console.log(shuffledPicks);
 
   // step three: loop through the array attempting a random legal operation in order of complexity
 
-  // TO DO: Start by multiplying one big by one small?
+  // TODO: Start by multiplying one big by one small?
   const expr = shuffledPicks.reduce(
     (acc, pick) => {
       const opKey = Math.floor(Math.random() * 4);

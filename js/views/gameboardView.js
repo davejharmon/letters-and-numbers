@@ -16,6 +16,13 @@ class GameboardView extends View {
     box.innerHTML = val;
   }
 
+  boxError() {
+    // find first empty box
+    const box = this._parentElement.querySelector('.pick-empty');
+    box.classList.add('shake');
+    const shakingBox = setTimeout(() => box.classList.remove('shake'), 500);
+  }
+
   _generateMarkup() {
     let boxesMarkup = '';
     for (let i = 0; i < this._data.maxLength; i++)
