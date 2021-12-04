@@ -5,6 +5,7 @@ import gameboardView from './views/gameboardView.js';
 import buttonsView from './views/buttonsView.js';
 import backendView from './views/backendView.js';
 import backendNavView from './views/backendNavView.js';
+import backendConsoleView from './views/backendConsoleView.js';
 import View from './views/view.js';
 ////////////////////////////////////////
 
@@ -37,7 +38,7 @@ const armTimer = function (round) {
 };
 
 const startGame = function (currentRound) {
-  // step zero: start the timer
+  // step one: start the timer
   currentRound.countdown = true;
   model.state.timer = setInterval(() => {
     if (currentRound.time === 0) {
@@ -50,7 +51,10 @@ const startGame = function (currentRound) {
     buttonsView.update(currentRound);
   }, 1000);
 
+  // step two: pick game type and resolve
+
   if (currentRound.type === 'numbers') {
+    backendConsoleView.render(currentRound);
     headerView.loadNumbersGame(currentRound);
 
     // perform the cecil animation (randomising number)

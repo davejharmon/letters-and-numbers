@@ -94,72 +94,58 @@ export const pickNumber = function (stackNum) {
 
 export const crunchNumbers = function (round) {
   console.log("Let's find a numbers solution...");
-  // FIXME: This is messy, needs refactoring
-  const nums = round.picks;
-  let randomLargeNum, secondLargestNum;
-  // step one: multiply the largest small by a random large to kick us off.
-  const largestSmallNum = [...nums].reduce((acc, pick) =>
-    pick > acc && pick < 25 ? pick : acc
+  const nums = [...round.picks];
+
+  // step one: find the largest small under 10 (num1)
+  const num1 = [...nums].reduce(
+    (acc, num) => (num > acc && num < 10 ? num : acc),
+    0
   );
-  nums.splice(nums[nums.indexOf(largestSmallNum)], 1);
+  // step two: find a random large, or sceond largest (num2)
+  const num2 = [...nums]
+    .sort(() => Math.random() - 0.5)
+    .reduce((acc, num) => ((num > acc && num <= 10) || num >= 25 ? num : acc));
 
-  const largeNums = [...round.picks].filter(pick => pick >= 25);
-  if (largeNums.length > 0) {
-    randomLargeNum = largeNums.at(Math.floor(Math.random() * largeNums.length));
-  } else {
-    secondLargestNum = [...nums].reduce((acc, pick) =>
-      pick > acc ? pick : acc
-    );
-  }
-  const secondNum = randomLargeNum ? randomLargeNum : secondLargestNum;
-  nums.splice(nums[nums.indexOf(secondNum)], 1);
+  // step three: splice the selected numbers from the array.
+  nums.splice(nums.indexOf(num1), 1);
+  nums.splice(nums.indexOf(num2), 1);
 
-  console.log(
-    `Largest Small Num is ${largestSmallNum} and second num is ${secondNum}. There are ${nums.lenth} nums remaining.`
-  );
+  // step four: shuffle the remaining picks
+  nums.sort(() => Math.random() - 0.5);
 
-  const shuffledPicks = [...round.picks].sort(() => Math.random() - 0.5);
-  let num;
-  console.log(shuffledPicks);
+  // step five: loop through the array attempting a random legal operation in order of complexity
+  const targ = round.target[0];
+  let num; // test number
 
-  // step three: loop through the array attempting a random legal operation in order of complexity
-
-  // TODO: Start by multiplying one big by one small?
-  const expr = shuffledPicks.reduce(
+  const expr = nums.reduce(
     (acc, pick) => {
       const opKey = Math.floor(Math.random() * 4);
-      console.log(`Next number is ${pick}...`);
-      console.log(acc);
 
       switch (opKey) {
         case 0:
-          console.log("Let's try division first");
           num = acc[0] / pick;
 
           if (num % 0 && num > 100) return [acc[0] / pick, `${acc[1]}/${pick}`];
 
         case 1:
-          console.log("Let's try multiplication next.");
           num = acc[0] * pick;
 
           if (num > 0 && num < 1000)
             return [acc[0] * pick, `${acc[1]}*${pick}`];
 
         case 2:
-          console.log("Let's try subtraction third.");
           num = acc[0] - pick;
 
           if (num >= 100) return [acc[0] - pick, `${acc[1]}-${pick}`];
 
         case 3:
-          console.log("OK fine, we'll add it.");
           return [acc[0] + pick, `${acc[1]}+${pick}`];
       }
     },
-    [0, '']
+    [num2 * num1, `(${num2}*${num1})`]
   );
-  console.log('All done!');
-  console.log(expr);
+  // console.log(expr);
   round.target.push(expr[0]);
   round.solution = expr[1];
+  console.log(expr);
 };
